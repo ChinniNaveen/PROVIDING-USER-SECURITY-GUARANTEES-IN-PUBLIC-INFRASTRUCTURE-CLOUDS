@@ -1,0 +1,189 @@
+if (Firstname == "") 
+{
+    alert("Enter First Name");
+    return false;
+}
+
+if (LastName == "")
+ {
+    alert("Enter Last Name");
+    return false;
+}
+
+if (Email == "") 
+{
+    alert("Enter Email");
+    return false;
+}
+
+ if (Pin == "") 
+{
+    alert("Enter Pin");
+    return false;
+}
+ if(WebUrl == "")
+{
+   alert("Enter Web URL");
+   return false;
+}
+if (City == "")
+{
+   alert("Select City");
+   return false;
+}
+Now for email value we will create a parameter that finds if the email format is valid or not.
+
+Hide   Copy Code
+var emailPat = /^(\".*\"|[A-Za-z]\w*)@(\[\d{1,3}(\.\d{1,3}){3}]|[A-Za-z]\w*(\.[A-Za-z]\w*)+)$/
+            var EmailmatchArray = Email.match(emailPat);
+Here we check it is valid or not..
+
+Hide   Copy Code
+if (EmailmatchArray == null) {
+    alert("Your email address seems incorrect. Please try again.");
+    return false;
+}
+-----------------------------------------------
+
+
+
+
+
+
+
+ private bool IsValidEmailId(string InputEmail)
+    {
+        //Regex To validate Email Address
+        Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+        Match match = regex.Match(InputEmail);
+        if (match.Success)
+        {
+            Session["id"] = "s";
+            return true;
+
+        }
+        else
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "temp", "<script language='javascript'>alert('invalid Email');</script>", false);
+        
+            return false;
+        
+        }
+    }
+--------------------------------------------
+
+ string InputEmail = email.Text;
+        IsValidEmailId(InputEmail);
+        if ("s" == Session["id"].ToString())--------------
+-------------------------------------------
+Accept only numbers in textbox
+------------------------------
+<asp:FilteredTextBoxExtender ID="TextBox1_FilteredTextBoxExtender" runat="server"
+Enabled="True" TargetControlID="TextBox1" FilterType="Numbers">
+</asp:FilteredTextBoxExtender>
+------------------------
+<asp:TextBox ID="TextBox1" runat="server" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>
+        {
+-------------------------------
+<asp:RangeValidator runat="server"id="valrNumber" ControlToValidate="txtNu" Type="Integer"
+    MinimumValue="0"
+    MaximumValue="999"
+    CssClass="input-error"
+    ErrorMessage="Please enter a positive integer."
+    Display="Dynamic">
+</asp:RangeValidator>
+----------------------------------
+ <asp:RegularExpressionValidator ID="RegularExpressionValidatorNumeric" runat="server" 
+ControlToValidate="yourControl ID" ErrorMessage="Registraion ID Should be a Numeric" 
+ValidationExpression="^\d+$"  ></asp:RegularExpressionValidator>
+----------------------------------------
+<input type="text"  onkeypress = "return isDigit(event,this.value);"/>
+
+function isDigit(evt, txt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+
+        var c = String.fromCharCode(charCode);
+
+        if (txt.indexOf(c) > 0 && charCode == 46) {
+            return false;
+        }
+        else if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+
+        return true;
+    }
+-------------------------------------
+accpting only chars
+-----------------
+private void textBox1_TextChanged(object sender, EventArgs e)
+{
+    if (!System.Text.RegularExpressions.Regex.IsMatch(textBox1.Text, "^[a-zA-Z]"))
+    {
+        MessageBox.Show("This textbox accepts only alphabetical characters");
+        textBox1.Text.Remove(textBox1.Text.Length - 1);
+    }
+}
+------------------
+void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+{
+    e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+---------------------
+
+private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+    {
+
+        if (!char.IsLetter(e.KeyChar))
+        {
+            e.Handled = true;
+        }
+    }
+----------------
+private void textbox1_KeyDown_1(object sender, KeyEventArgs e)
+{
+    if (e.Key >= Key.A && e.Key <= Key.Z)
+    {
+    }
+    else
+    {
+       e.Handled = true;
+    }
+}
+-------------------------------------------
+        private void tbCustomerName_KeyPress(object sender, KeyPressEventArgs e)
+    {
+        e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back||e.KeyChar==(char)Keys.Space);
+    }
+
+
+
+----------------------------------------
+Accepting only Alphabets
+-----------------
+ <script language="Javascript" type="text/javascript">
+
+      function onlyAlphabets(e, t) {
+          try {
+              if (window.event) {
+                  var charCode = window.event.keyCode;
+              }
+              else if (e) {
+                  var charCode = e.which;
+              }
+              else { return true; }
+              if ((charCode > 6 && charCode < 9)(charCode > 45 && charCode < 47) || (charCode > 63 && charCode < 65 ) || (charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                  return true;
+              else
+                  return false;
+          }
+          catch (err) {
+              alert(err.Description);
+          }
+      }
+
+    </script>
+----------------------------------
+
+ onkeypress="return onlyAlphabets(event,this);"
+
+(charCode > 6 && charCode < 9)(charCode > 45 && charCode < 47) || (charCode > 63 && charCode < 65) ||
